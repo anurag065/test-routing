@@ -29,6 +29,11 @@ export function middleware(req: NextRequest) {
 
   // Only rewrite if the host is 'tele-s.com'
   if (req.headers.get('host') === 'tele-s.com') {
+    // If the path is /custom-domain, do not rewrite
+    if (url.pathname === '/custom-domain') {
+      return NextResponse.next();
+    }
+
     if (url.pathname === '/') {
       return NextResponse.next();
     }
